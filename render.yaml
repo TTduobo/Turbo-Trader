@@ -1,8 +1,13 @@
 services:
-  - type: web
+  - type: worker  # Use "worker" (not "web") for non-HTTP apps
     name: turbo-trader
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: python bot.py
-    plan: starter
-    region: singapore
+    plan: free  # Upgrade to "starter" if needed
+    region: singapore  # or "oregon", "frankfurt"
+    envVars:
+      - key: API_KEY
+        sync: false  # Set manually in Render Dashboard
+      - key: API_SECRET
+        sync: false
